@@ -33,7 +33,7 @@ class Subscription protected () extends AnonymousSubscription {
 
 @js.native
 object Subscription extends js.Object {
-  var EMPTY: Subscription = js.native
+  val EMPTY: Subscription = js.native
 }
 
 

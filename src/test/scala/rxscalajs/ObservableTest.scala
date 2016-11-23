@@ -612,6 +612,12 @@ object ObservableTest extends TestSuite {
         sub.unsubscribe()
         assert(sub.isUnsubscribed)
       }
+      'SubscriptionObjectTests {
+        val empty = Subscription.EMPTY
+        assert(!empty.isUnsubscribed)
+        empty.unsubscribe()
+        assert(empty.isUnsubscribed)
+      }
       'ObserverTests {
         val o = new Observer[Int] {
           override def next(n: Int) = unit(n)
