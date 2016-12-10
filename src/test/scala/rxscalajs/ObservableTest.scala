@@ -17,6 +17,7 @@ object ObservableTest extends TestSuite {
 
   def tests = TestSuite {
     val unit = (n: Any) => ()
+    val rethrow = (e: Any) => throw new Exception(s"error in test ${e.toString}")
     'FacadeTests {
       val obs = ObservableFacade.of(1,11,21,1211,111221)
       val intervalObs = ObservableFacade.interval(100).take(5)
@@ -280,6 +281,13 @@ object ObservableTest extends TestSuite {
         val result = ObservableFacade.create(func)
         result.subscribe(unit)
         assert(x)
+      }
+    }
+    'FactoryTests {
+      'CombineLatest {
+        val xs = Vector(1,2,3,4).map(x => Observable.just(x))
+        val obs = Observable.combineLatest(xs)(identity)
+        obs.subscribe(unit, rethrow)
       }
     }
     'WrapperTests{
